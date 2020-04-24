@@ -39,7 +39,6 @@ class Ownnet(nn.Module):
             nn.Linear((32*4*4 + 32*2*2 + 32*1*1), 256),
             nn.ELU(),
             nn.Dropout(p=0.1),
-            # nn.Linear(256, 10)
             nn.Linear(256, 10)
         )
 

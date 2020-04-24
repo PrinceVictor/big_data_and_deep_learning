@@ -24,7 +24,7 @@ parser.add_argument('--last-epoch', default=-1, type=int,
                     help='last-epoch')
 parser.add_argument('--figure-name', default=None,
                     help='figure name')
-parser.add_argument('--model-savepath', default='/home/victor/darling/deeplearning_note/model_para',
+parser.add_argument('--model-savepath', default='./model_para',
                     help='model save path')
 parser.add_argument('--no-cuda', action='store_true', default=False,
                     help='enables CUDA training')
@@ -108,8 +108,8 @@ if __name__ == '__main__':
     train_process = preprocess.get_transform((28, 28), argument=False)
     test_process = preprocess.get_transform((28, 28), argument=False)
 
-    trainset = DataLoader.fashionmnist_dataset(train_process, train=True)
-    testset = DataLoader.fashionmnist_dataset(test_process, train=False)
+    trainset = DataLoader.mnist_dataset(train_process, train=True)
+    testset = DataLoader.mnist_dataset(test_process, train=False)
 
     trainloader = torch.utils.data.DataLoader(trainset,
                                               batch_size=Batchsize,
@@ -144,7 +144,6 @@ if __name__ == '__main__':
     optimizer = optim.SGD([{'params': model.parameters(), 'initial_lr': 0.001}], lr=0.001, momentum=0.8)
     # optimizer = optim.Adam([{'params': model.parameters(), 'initial_lr': 0.001}],
     #                        lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)
-    # optimizer = optim.Adam(model.parameters(), lr=0.001)
     lr_shedule = lr_scheduler.MultiStepLR(optimizer, milestones=[], gamma=0.1, last_epoch=args.last_epoch)
     lr_shedule.step()
 
